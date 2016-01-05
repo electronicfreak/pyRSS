@@ -12,7 +12,7 @@ func.sql(con,'''CREATE TABLE pages (
   path2 varchar(255) NOT NULL ,
   path3 varchar(255) NOT NULL ,
   pathNames varchar(100) NOT NULL DEFAULT 'URL',
-  lastCh timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  pNext timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   waitfor int(11) NULL DEFAULT 86400
 )''')
 
