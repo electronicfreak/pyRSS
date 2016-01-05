@@ -16,9 +16,18 @@ def scrappy(url,key=False):
 			#print(k)
 			r.append(tree.xpath(k))
 		
+def writeData(url, data=["","",""]):
+	pass
+	# schreibt daten in db wenn url nicht doppelt ist
+	
 # holt anleitung aus db
 def checkPages():
 	sql = f.sql_connect(c.DB_FILE)
+	#alle pages die in der vergangenheit liegen anzeigen
+	
+	#für jeden scrappy()
+	
+	#ergebnisse in db eintragen wenn sie nicht schon existieren
 	
 	
 	
