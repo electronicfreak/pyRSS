@@ -1,0 +1,4 @@
+<?
+	require('secret.php');
+	// xml
+?>
