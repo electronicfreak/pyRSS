@@ -6,6 +6,7 @@
 			$res = mysql_query("SELECT url FROM urls WHERE id = '{$_GET['id']}'");
 			if(mysql_num_rows($res) == 1) {
 				$url = mysql_result($res,0);
+				mysql_query("DELETE FROM urls WHERE id = '{$_GET['id']}'");
 				header('Location: '. $url);
 				die;
 			}else{
