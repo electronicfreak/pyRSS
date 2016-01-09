@@ -21,17 +21,25 @@ def scrappy(url,key=False):
 			
 	return r
 		
-def writeData(root,url, data):
+def updateSrv(url,data,cat):
+	r = requests.post(c.UPLOAD_PATH, data={'@url': url, '@data': data,'@cat': cat})
+	if r.reason is "200 OK":
+		return True
+	return False
+
+def writeData(root,url, data, cat):
 		global lite
 		
 		url = f.no_inject(url)
 		data = f.no_inject(data)
+		cat = f.no_inject(cat)
 		
 		if not url.startswith("http"):
-			
+			url = root+"/"+url
 		
 		if not f.sql(lite,"SELECT * FROM ergebnisse WHERE `url` = '"+url+"'):
 			f.sql(lite,"INSERT INTO ergebnisse (`url`,`data`) VALUES ('"+url+"','"+data+"')")
+			updateSrv(url,data,cat)
 			return True
 		return False
 	
@@ -42,7 +50,7 @@ def checkPages():
 		#print(i)
 		a = scrappy(i["url"],i["search"])
 		for b in range(a[0].len):
-			writeData(i["root"],a[0][b],a[1][b])
+			writeData(i["root"],a[0][b],a[1][b],i["cat"])
 	
 #scrappy("http://rule34.xxx/index.php?page=post&s=list&tags=living_clothes",['//div//span//a/@href','//div//span//a//img/@alt'])
 checkPages()
