@@ -1,4 +1,7 @@
 <?
+	error_reporting(E_ALL);
+	ini_set('display_errors', '1');
+	
 	require('secret.php');
 
         function chkGet($str,$allow=false) {
