@@ -1,5 +1,5 @@
 <?
-	require('secret.php');
+	require('func.php');
 	// startseite
 	$res = mysql_query("SELECT * FROM urls ORDER BY ts");
 	$num = mysql_num_rows($res);

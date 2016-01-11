@@ -1,6 +1,6 @@
 <?
 	header ("Content-Type:text/xml");
-	require('secret.php');
+	require('func.php');
 	// startseite
 	$res = mysql_query("SELECT * FROM urls ORDER BY cat,ts");
 	$num = mysql_num_rows($res);

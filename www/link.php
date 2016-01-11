@@ -1,5 +1,5 @@
 <?
-	require('secret.php');
+	require('func.php');
 	// link weiterleitung
 	if(isset($_GET['id'])) {
 		if(is_numeric($_GET['id'])) {
