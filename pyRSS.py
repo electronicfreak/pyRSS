@@ -41,6 +41,7 @@ def writeData(root,url, data, cat):
 		if not f.sql(lite,"SELECT * FROM ergebnisse WHERE `url` = '"+url+"'"):
 			f.sql(lite,"INSERT INTO ergebnisse (`url`,`data`) VALUES ('"+url+"','"+data+"')")
 			updateSrv(url,data,cat)
+			print(url,data,cat)
 			return True
 		return False
 	
@@ -50,9 +51,13 @@ def checkPages():
 	for i in c.SEEDS:
 		#print(i)
 		a = scrappy(i["url"],i["search"])
-		#print(a)
-		for b in range(len(a[0])):	
-			writeData(i["root"],a[0][b],a[1][b],i["cat"])
+		print(a)
+		for b in range(len(a[0])):
+			print(b)
+			try:
+			    writeData(i["root"],a[0][b],a[1][b],i["cat"])
+			except:
+			    pass
 	
 #scrappy("http://rule34.xxx/index.php?page=post&s=list&tags=living_clothes",['//div//span//a/@href','//div//span//a//img/@alt'])
 checkPages()
