@@ -8,8 +8,9 @@
 
 		$url = chkGet($_POST['url']);
 		$data = chkGet($_POST['data']);
+		$title = chkGet($_POST['title']);
 		$cat = chkGet($_POST['cat']);
-		mysql_query("INSERT INTO urls (url, data, cat) VALUES ('{$url}','{$data}','{$cat}')");
+		mysql_query("INSERT INTO urls (url, data, title, cat) VALUES ('{$url}','{$data}','{$title}','{$cat}')");
 		//echo mysql_error();	
 		if(mysql_affected_rows() > 0) {
 			echo 'OK';
