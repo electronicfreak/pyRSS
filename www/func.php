@@ -21,5 +21,7 @@
 	// Favorit entfernen
 	function remFav() {}
 
-
+	function sonderzeichen($in) {
+		return str_replace(array(),array(),$in);
+	}
 ?>

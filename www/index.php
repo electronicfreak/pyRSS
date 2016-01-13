@@ -1,7 +1,8 @@
 <?
 	require('func.php');
 	// startseite
-	$res = mysql_query("SELECT * FROM urls ORDER BY cat,ts");
+	$res = mysql_query("SELECT * FROM urls WHERE `seen` IS NULL ORDER BY cat,ts");
+	echo mysql_error();
 	$num = mysql_num_rows($res);
 	echo '<h1>RSS</h1>';
 	$cat = '';
@@ -11,6 +12,6 @@
 			echo '<h2>'. $a['cat'] .'</h2>';
 			$cat= $a['cat'];
 		}
-		echo '<a href="link.php?id='.$a['id'].'" style="display:block; margin-bottom:10px;">'. nl2br($a['data']) .'</a>';
+		echo '<div><a href="link.php?id='.$a['id'].'" style="display:block; margin-bottom:10px;">'. nl2br($a['title']) .'</a><div>'. nl2br($a['data']) .'</div></div>';
 	}
 ?>
