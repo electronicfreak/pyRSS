@@ -19,7 +19,7 @@
 		}
 	}
 	
-	if(isset($_GET['titel')) {		
+	if(isset($_GET['title'])) {		
 		$title = chkGet($_GET['title']);		
 		mysql_query("INSERT INTO urls (title, cat) VALUES ('{$title}','GET-Input')");
 		if(mysql_affected_rows() > 0) {
