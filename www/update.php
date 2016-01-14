@@ -22,5 +22,10 @@
 	if(isset($_GET['titel')) {		
 		$title = chkGet($_GET['title']);		
 		mysql_query("INSERT INTO urls (title, cat) VALUES ('{$title}','GET-Input')");
+		if(mysql_affected_rows() > 0) {
+			echo 'OK';
+		}else{
+			echo 'ERROR';
+		}
 	}
 ?>
