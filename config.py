@@ -31,6 +31,20 @@ SEEDS = (
 		'tStart':"<title>",
 		'tStop':"</title>",
 		'cat':"hsb"
+	}	,{
+		'root': "http://rule34.xxx",
+		'url': "http://rule34.xxx/index.php?page=post&s=list&tags=living_clothes",
+		'pStart':'<div><span',
+		'pStop':'<div id="paginator">',
+		'lStart':"<a",
+		'lStop':"</a></span>",
+		'uStart':'href="',
+		'uStop':'" >',
+		'dStart':'',
+		'dStop':'',
+		'tStart':'',
+		'tStop':'',
+		'cat':"h"
 	}
 )
 """

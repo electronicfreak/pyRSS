@@ -18,4 +18,9 @@
 			echo 'ERROR';
 		}
 	}
+	
+	if(isset($_GET['titel')) {		
+		$title = chkGet($_GET['title']);		
+		mysql_query("INSERT INTO urls (title, cat) VALUES ('{$title}','GET-Input')");
+	}
 ?>

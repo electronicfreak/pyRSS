@@ -59,8 +59,10 @@ def sendData(root,url, data, title, cat):
 	if not url.startswith("http"):
 		url = root+"/"+url
 	
-	if not f.sql(lite,"SELECT * FROM ergebnisse WHERE `url` = '"+url+"'"):
-		f.sql(lite,"INSERT INTO ergebnisse (`url`,`data`,`title`) VALUES ('"+url+"','"+data+"','"+title+"')")
+	
+	#print(len(f.sql(lite,"SELECT * FROM ergebnisse WHERE `url` = '"+url+"'")))
+	if len(f.sql(lite,"SELECT * FROM ergebnisse WHERE `url` = '"+url+"'")) <= 0:
+		f.sql(lite,"INSERT INTO ergebnisse (`url`) VALUES ('"+url+"')")
 		return True
 	return False
 		
@@ -73,8 +75,14 @@ def updateData(url,data,title,cat):
 def doStuff(i):
 	page = getPage(i['url'])
 	page = findStart(page,i['pStart'],i['pStop'])
+	if c.DEBUG:
+		print(page)
+		print("----------------------------------------------------------------------")
 	lines = findLines(page,i['lStart'],i['lStop'])
-	
+	if c.DEBUG:
+		print(lines)
+		print("-----------------------------------------------------------------------")
+
 	for j in lines:
 		url = findData(j,i['uStart'],i['uStop'])
 		data = findData(j,i['dStart'],i['dStop'])
