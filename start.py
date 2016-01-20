@@ -48,29 +48,34 @@ def findData(line,start,stop):
 	else:
 		return ""
 
-def sendData(root,url, data, title, cat):
+def sendData(url, data, title, cat):
 	global lite
 	
 	url = f.no_inject(url)
 	data = f.no_inject(data)
 	title = f.no_inject(title)
 	cat = f.no_inject(cat)
-	
-	if not url.startswith("http"):
-		url = root+"/"+url
-	
-	
-	#print(len(f.sql(lite,"SELECT * FROM ergebnisse WHERE `url` = '"+url+"'")))
-	if len(f.sql(lite,"SELECT * FROM ergebnisse WHERE `url` = '"+url+"'")) <= 0:
-		f.sql(lite,"INSERT INTO ergebnisse (`url`) VALUES ('"+url+"')")
+
+	url = url.replace("&amp;","&")
+
+	if c.DEBUG:
+		print(len(f.sql(lite,"SELECT * FROM ergebnisse WHERE `url` = '"+url+"'")))
+		print("INSERT INTO ergebnisse (url) VALUES ('"+url+"')")
 		return True
-	return False
+	else:
+		if len(f.sql(lite,"SELECT * FROM ergebnisse WHERE `url` = '"+url+"'")) <= 0:
+			f.sql(lite,"INSERT INTO ergebnisse (`url`) VALUES ('"+url+"')")
+			return True
+		return False
 		
 def updateData(url,data,title,cat):
-	r = requests.post(c.UPLOAD_PATH, data={'url': url, 'data': data,'title':title,'cat': cat})
-	if r.text == "OK":
-		return True
-	return False
+	if c.DEBUG:
+	    return True
+	else:
+		r = requests.post(c.UPLOAD_PATH, data={'url': url, 'data': data,'title':title,'cat': cat})
+		if r.text == "OK":
+			return True
+		return False
 	
 def doStuff(i):
 	page = getPage(i['url'])
@@ -87,9 +92,11 @@ def doStuff(i):
 		url = findData(j,i['uStart'],i['uStop'])
 		data = findData(j,i['dStart'],i['dStop'])
 		title = findData(j,i['tStart'],i['tStop'])
-		if c.DEBUG:
-			print(url,data,title)
-		elif sendData(i['root'],url,data,title,i['cat']):
+
+		if not url.startswith("http"):
+		    url = i['root'] +"/"+ url
+
+		if sendData(url,data,title,i['cat']):
 			updateData(url,data,title,i['cat'])
 
 if type(c.SEEDS) == dict:
