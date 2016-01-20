@@ -12,6 +12,9 @@
 			echo '<h2>'. $a['cat'] .'</h2>';
 			$cat= $a['cat'];
 		}
+		
+		if($a['title'] == '') $a['title'] == '(kein Titel)';
+		
 		echo '<div><a href="link.php?id='.$a['id'].'" style="display:block; margin-bottom:10px;">'. nl2br($a['title']) .'</a><div>'. nl2br($a['data']) .'</div></div>';
 	}
 ?>

@@ -7,6 +7,7 @@
 			if(mysql_num_rows($res) == 1) {
 				$url = mysql_result($res,0);
 				mysql_query("UPDATE urls SET seen = NOW() WHERE id = '{$_GET['id']}'");
+				$url = str_replace("&amp;","&",$url);
 				header('Location: '. $url);
 				die;
 			}else{
